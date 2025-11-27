@@ -890,7 +890,7 @@ body.light-mode .developer-popup {
 /* Botones de Utilidad (Modo Oscuro/Claro) */
 .utility-buttons {
     position: fixed;
-    top: 120px; /* Ajustar para que esté más abajo del header (0.5cm de separación) */
+    top: 100px; /* Ajustar para que esté más abajo del header (0.5cm de separación) */
     right: 20px;
     display: flex;
     gap: 15px; /* Espacio entre los botones */
