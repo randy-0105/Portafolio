@@ -1,0 +1,798 @@
+/* Estilos específicos para el panel de administración */
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.admin-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Fondo del portafolio */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, #0A0A10 0%, #000000 100%); /* Negro más oscuro */
+    background-size: 200% 200%;
+    animation: space-background 30s ease infinite;
+    z-index: -2;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(128, 0, 128, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 0, 255, 0.2) 0%, transparent 50%);
+    background-size: 200% 200%;
+    animation: aurora-animation 40s ease infinite alternate;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes aurora-animation {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes space-background {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0.2; /* Aumentar la opacidad mínima */
+    animation: twinkle 5s infinite ease-in-out;
+    width: 4px; /* Aumentar el tamaño de las estrellas */
+    height: 4px; /* Aumentar el tamaño de las estrellas */
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); } /* Ajustar opacidad y escala */
+    50% { opacity: 1; transform: scale(1.2); } /* Ajustar opacidad y escala */
+}
+
+.admin-login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--font-family-main);
+    position: relative; /* Necesario para que los pseudo-elementos se posicionen correctamente */
+    z-index: 1; /* Asegurar que el contenido del body esté por encima del fondo */
+}
+
+.login-container {
+    background-color: rgba(26, 26, 46, 0.9); /* Fondo oscuro semi-transparente */
+    border: 1px solid var(--electric-blue); /* Borde azul eléctrico */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra brillante azul/cian */
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1s ease-out; /* Animación de entrada */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container h2 {
+    color: var(--electric-blue); /* Azul eléctrico para el título */
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.7); /* Sombra de texto brillante */
+    font-family: 'Montserrat', sans-serif; /* Usar una fuente similar al portafolio */
+}
+
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--white-color);
+    font-weight: 600; /* Un poco más de peso */
+    font-size: 1.1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] { /* Añadir email para el formulario 2FA */
+    width: 100%;
+    padding: 12px 10px;
+    box-sizing: border-box; /* Incluir padding y borde en el ancho total */
+    border: 1px solid var(--electric-blue); /* Borde azul eléctrico */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    color: var(--white-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ocultar el icono nativo de mostrar contraseña en algunos navegadores */
+.form-group input[type="password"]::-ms-reveal {
+    display: none;
+}
+.form-group input[type="password"]::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+.form-group input[type="password"]::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+
+
+.password-input-container {
+    position: relative;
+    width: 100%;
+    display: flex; /* Usar flexbox para alinear el input y el icono */
+    align-items: center; /* Centrar verticalmente los elementos */
+}
+
+.password-input-container input {
+    flex-grow: 1; /* Permitir que el input ocupe el espacio disponible */
+    padding-right: 45px; /* Espacio para el icono */
+    box-sizing: border-box; /* Incluir padding y borde en el ancho total */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: var(--white-color); /* Color blanco para el icono */
+    font-size: 1.1rem;
+    padding: 5px; /* Añadir padding para facilitar el clic */
+    top: 50%; /* Centrar verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para el centrado */
+}
+
+.toggle-password:hover {
+    color: var(--electric-blue); /* Azul Eléctrico al pasar el ratón */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus { /* Añadir email para el formulario 2FA */
+    border-color: var(--secondary-color); /* Color secundario al enfocar */
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.5); /* Sombra brillante al enfocar */
+    outline: none;
+}
+
+.form-group.error input {
+    border-color: #e74c3c !important; /* Rojo para el borde inferior en caso de error */
+}
+
+.login-container .btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.2rem;
+    margin-top: 25px;
+    background-color: var(--electric-blue); /* Azul eléctrico para el botón */
+    color: var(--dark-color); /* Texto oscuro */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4); /* Sombra brillante */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-container .btn:hover {
+    background-color: var(--secondary-color); /* Color secundario al pasar el ratón */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.6);
+}
+
+.error-message {
+    color: #e74c3c; /* Rojo */
+    background-color: #fdeded; /* Fondo claro para el error */
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.success-message {
+    color: #27ae60; /* Verde */
+    background-color: #e6ffe6; /* Fondo claro para el éxito */
+    border: 1px solid #27ae60;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Estilos para los enlaces de texto (botones "Volver al Portafolio" y "Olvidaste tu contraseña") */
+.text-link {
+    display: block;
+    color: var(--secondary-color); /* Color secundario para los enlaces */
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.text-link:hover {
+    color: var(--electric-blue); /* Azul eléctrico al pasar el ratón */
+    text-decoration: underline;
+}
+
+/* Estilos para el panel de administración (después del login) */
+.admin-body {
+    background-color: var(--light-color);
+}
+
+.admin-header {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header .container {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: space-between; /* Espacio entre los elementos */
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.admin-nav {
+    order: 1; /* La navegación va primero */
+    flex-basis: 100%; /* Ocupa todo el ancho disponible */
+    margin-bottom: 15px; /* Espacio debajo de la navegación */
+}
+
+.admin-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar los botones de navegación */
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-nav a {
+    color: var(--white-color);
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.admin-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-panel-title {
+    order: 2; /* El título va después de la navegación */
+    color: var(--white-color);
+    font-size: 2.2rem;
+    text-align: center;
+    width: 100%; /* Ocupar todo el ancho */
+    margin-top: 15px; /* Espacio encima del título */
+}
+
+/* Estilos para el menú de usuario */
+.admin-user-menu {
+    order: 3; /* El menú de usuario va al final en el flujo normal */
+    position: absolute; /* Posicionar absolutamente en la esquina superior derecha */
+    top: 20px; /* Ajustar según el padding del header */
+    right: 20px; /* Ajustar según el padding del header */
+    z-index: 100; /* Asegurar que esté por encima de otros elementos */
+}
+
+/* Estilos para la sección de Información Personal */
+.personal-info-form {
+    position: relative;
+}
+
+.personal-info-header-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-image-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.profile-image-preview-container {
+    width: 200px; /* Tamaño fijo para la imagen de perfil */
+    height: 200px;
+    border: 1px solid var(--electric-blue);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.profile-image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+}
+
+.profile-image-group input[type="file"] {
+    display: none; /* Ocultar el input de archivo original */
+}
+
+.profile-image-group label.btn-small {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.profile-image-group span#profile-image-name {
+    font-size: 0.9rem;
+    color: var(--white-color);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-item select,
+.contact-item input[type="text"] {
+    flex-grow: 1;
+}
+
+.btn-add-contact {
+    margin-top: 15px;
+}
+
+.admin-user-btn {
+    background-color: var(--electric-blue); /* Color de fondo para el botón de usuario */
+    color: var(--white-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.admin-user-btn:hover {
+    background-color: #0056b3; /* Un azul más oscuro al pasar el ratón */
+}
+
+.admin-dropdown-menu {
+    position: absolute;
+    top: 100%; /* Debajo del botón */
+    right: 0;
+    background-color: var(--dark-color);
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.admin-dropdown-menu.show-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.admin-user-menu:hover .admin-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.admin-dropdown-menu li {
+    padding: 0;
+}
+
+.admin-dropdown-menu a {
+    color: var(--white-color);
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.admin-dropdown-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para el submenú */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .submenu {
+    position: absolute;
+    left: -100%; /* Posicionar a la izquierda del elemento padre */
+    top: 0;
+    background-color: var(--dark-color);
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 200px;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.dropdown-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.dropdown-submenu a i {
+    float: right;
+    margin-top: 3px;
+}
+
+/* Ajustes para el menú desplegable del usuario */
+.admin-dropdown-menu {
+    right: 0; /* Asegurar que el menú desplegable se alinee a la derecha del botón */
+    left: auto;
+}
+
+.admin-dropdown-menu .dropdown-submenu .submenu {
+    left: -100%; /* El submenú se abre a la izquierda del elemento padre */
+    right: auto;
+}
+
+.admin-main {
+    padding: 40px 0;
+    flex-grow: 1; /* Asegura que el contenido principal ocupe el espacio restante */
+    color: var(--white-color); /* Color de texto para el contenido principal */
+}
+
+.admin-main h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--electric-blue); /* Azul eléctrico para los títulos principales */
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.admin-main h3 {
+    font-size: 1.8rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--secondary-color); /* Color secundario para subtítulos */
+    border-bottom: 2px solid rgba(0, 255, 255, 0.3); /* Borde inferior sutil */
+    padding-bottom: 10px;
+}
+
+.admin-main h4 {
+    font-size: 1.4rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: var(--white-color);
+}
+
+/* Estilos para formularios dentro del panel */
+.admin-form {
+    background-color: rgba(26, 26, 46, 0.8); /* Fondo oscuro semi-transparente */
+    border: 1px solid var(--electric-blue);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    margin-bottom: 30px;
+}
+
+.admin-form .form-group {
+    margin-bottom: 15px;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--white-color);
+    font-weight: 500;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form input[type="url"],
+.admin-form textarea,
+.admin-form select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--white-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-form input[type="text"]:focus,
+.admin-form input[type="email"]:focus,
+.admin-form input[type="password"]:focus,
+.admin-form input[type="url"]:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+    outline: none;
+}
+
+.admin-form .btn {
+    background-color: var(--electric-blue);
+    color: var(--dark-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+}
+
+.admin-form .btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+.admin-form .btn-small {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+
+.admin-form .btn-delete {
+    background-color: #e74c3c; /* Rojo para eliminar */
+}
+
+.admin-form .btn-delete:hover {
+    background-color: #c0392b;
+}
+
+.admin-form .btn-edit {
+    background-color: #f39c12; /* Naranja para editar */
+}
+
+.admin-form .btn-edit:hover {
+    background-color: #e67e22;
+}
+
+.admin-form .btn-secondary {
+    background-color: #7f8c8d; /* Gris para cancelar */
+}
+
+.admin-form .btn-secondary:hover {
+    background-color: #95a5a6;
+}
+
+/* Estilos para tablas */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(26, 26, 46, 0.7);
+    border-radius: 8px;
+    overflow: hidden; /* Para que los bordes redondeados se apliquen bien */
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    color: var(--white-color);
+}
+
+.admin-table th {
+    background-color: var(--electric-blue);
+    color: var(--dark-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.admin-table tbody tr:hover {
+    background-color: rgba(0, 255, 255, 0.05);
+}
+
+.admin-table td a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.admin-table td a:hover {
+    text-decoration: underline;
+}
+
+.edit-form-container {
+    background-color: rgba(34, 34, 60, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid var(--secondary-color);
+}
+
+.edit-form-container h5 {
+    color: var(--electric-blue);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+/* Responsive Admin Panel */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 30px;
+    }
+
+    .login-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .admin-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .admin-nav li {
+        margin: 5px 0;
+    }
+
+    .admin-user-menu {
+        margin-left: 0;
+        width: 100%;
+        text-align: right;
+    }
+
+    .admin-user-btn {
+        width: auto;
+    }
+
+    .admin-dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+
+    .admin-dropdown-menu .dropdown-submenu .submenu {
+        left: auto;
+        right: 100%; /* Abrir a la derecha en móviles para evitar desbordamiento */
+    }
+
+    .admin-panel-title {
+        font-size: 2rem;
+    }
+
+    .admin-main h2 {
+        font-size: 2rem;
+    }
+
+    .admin-main h3 {
+        font-size: 1.5rem;
+    }
+
+    .admin-form {
+        padding: 20px;
+    }
+
+    .admin-form input[type="text"],
+    .admin-form input[type="email"],
+    .admin-form input[type="password"],
+    .admin-form input[type="url"],
+    .admin-form textarea,
+    .admin-form select {
+        width: calc(100% - 20px);
+    }
+}
+
+.admin-footer {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    width: 100%;
+}
+
+/* Responsive Admin Panel */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 30px;
+    }
+
+    .login-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .admin-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .admin-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-nav li {
+        margin: 5px 0;
+    }
+
+    .admin-main h2 {
+        font-size: 2rem;
+    }
+}
