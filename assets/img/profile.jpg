@@ -1,0 +1,5 @@
+<!-- Contenido de imagen de marcador de posición (un SVG simple o un texto) -->
+<svg width="180" height="180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" fill="#cccccc"/>
+  <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#333333" text-anchor="middle" dy=".3em">Foto de Perfil</text>
+</svg>
